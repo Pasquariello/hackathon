@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" media="screen" href="css/style.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Shrikhand" rel="stylesheet">
+
+    <title>Boulder Fashion Forecast</title>
+
+    <!-- font-family: 'Shrikhand', cursive; -->
+
+    <style>
+        .test {
+            margin-left: 25%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class='head'>
+        <div id='head'></div>
+        <div id='currentForecast'></div>
+
+
+
+
+    </div>
+
+    <div id="show">
+        <img src="http://www.pngmart.com/files/3/Weather-PNG-HD.png" />
+
+        <div class="homeScreen">
+            <h1>Boulder Fashion Forecast</h1>
+            <p> Don't let unpredictable weather ruin your outfit!</p>
+            <p> Plan your outfit for any weather forecast</p>
+            <p> Please select a gender</p>
+            <div class="butts">
+                <button class='btn' onClick="malefashion()">Male</button>
+                <button class='btn ' onClick="femalefashion()">Female</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script>
+        // var item = items[Math.floor(Math.random()*items.length)];
+
+
+        //objects of temps and cloths
+
+
+
+        function malefashion() {
+
+
+
+
+            data = '';
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22Boulder%2C%20co%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys", true);
+            xhr.onload = function (e) {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        data = xhr.responseText
+                        showUser(data);
+                        //      console.log(data);
+                    } else {
+                        console.error(xhr.statusText);
+                    }
+                }
+            };
+            xhr.onerror = function (e) {
+                console.error(xhr.statusText);
+            };
+            xhr.send(null);
+
+
+
+
+
+            function showUser(data) {
+
+
+
+
+                console.log(typeof (data));
+                data = JSON.parse(data);
+                console.log(data);
+
+                var currentCity = data.query.results.channel.location.city;
+                console.log(currentCity);
+
+                console.log(data.query.results.channel.item.forecast[0])
+                var climate = data.query.results.channel.item.forecast[0].text;
+                // console.log(climate);
+                document.getElementById('show').innerHTML = '';
+                var day = data.query.results.channel.item.forecast[0].day;
+                var high = data.query.results.channel.item.forecast[0].high;
+                console.log(high);
+
+
+                var day2 = data.query.results.channel.item.forecast[1].day;
+                var day2Climate = data.query.results.channel.item.forecast[1].text;
+                var high2 = data.query.results.channel.item.forecast[1].high;
+
+
+
+
+                var day3 = data.query.results.channel.item.forecast[2].day;
+                var day3Climate = data.query.results.channel.item.forecast[2].text;
+                var high3 = data.query.results.channel.item.forecast[2].high;
+
+                var day4 = data.query.results.channel.item.forecast[3].day;
+                var day4Climate = data.query.results.channel.item.forecast[3].text;
+                var high4 = data.query.results.channel.item.forecast[3].high;
+
+                var day5 = data.query.results.channel.item.forecast[4].day;
+                var day5Climate = data.query.results.channel.item.forecast[4].text;
+                var high5 = data.query.results.channel.item.forecast[4].high;
+
+
+                var day6 = data.query.results.channel.item.forecast[5].day;
+                var day6Climate = data.query.results.channel.item.forecast[5].text;
+                var high6 = data.query.results.channel.item.forecast[5].high;
+
+                var day7 = data.query.results.channel.item.forecast[6].day;
+                var day7Climate = data.query.results.channel.item.forecast[6].text;
+                var high7 = data.query.results.channel.item.forecast[6].high;
+
+
+                function checkit() {
+
+
+
+
+                    if (high > 0 && high < 40) {
+                        function superCold() {
+                            var finalOutfit = [];
+                            var superCold = {
+
+
+                                'men': {
+                                    bottoms: ['mpants1', 'mpants2', 'mpants3'],
+                                    shoes: ['mshoes1', 'mshoes2', 'mshoes3'],
+                                    top: ['mtop1', 'mtop2', 'mtop3'],
+                                    outer: ['mouter1', 'mouter2', 'mouter3'],
+                                    accesssories: ['macc1', 'macc2', 'macc3'],
+
+                                },
+
+                            }
+
+                            //                            console.log(superCold.men.bottoms[0]);
+                            //
+                            //                             console.log(wsuperColdaccesssories);
+
+
+
+                            var msuperColdBottoms = superCold.men.bottoms[Math.floor(Math.random() * superCold.men.bottoms.length)];
+                            var msuperColdShoes = superCold.men.shoes[Math.floor(Math.random() * superCold.men.shoes.length)];
+                            var msuperColdTop = superCold.men.top[Math.floor(Math.random() * superCold.men.top.length)];
+                            var msuperColdOuter = superCold.men.outer[Math.floor(Math.random() * superCold.men.outer.length)];
+                            var msuperColdaccesssories = superCold.men.accesssories[Math.floor(Math.random() * superCold.men.accesssories.length)];
+
+
+
+                            text += '   <div class = "col-md-6 fashionBox">';
+
+                            text += '   <div class="leftB">' + msuperColdTop + '</div>';
+
+
+                            text += '   <div class="bottomB">' + msuperColdShoes + '</div>';
+
+
+                            text += '    <div class="topLeft">' + msuperColdaccesssories + '</div>';
+
+
+                            text += '  <div class="topRight">' + msuperColdOuter + '</div>';
+
+
+                            text += '  <div class="rightB">' + msuperColdBottoms + '</div>';
+
+
+                            text += '   </div>';
+
+
+                            text += '<p>' + msuperColdBottoms + ' ' + msuperColdShoes + ' ' + msuperColdTop + ' ' + msuperColdOuter + ' ' + msuperColdaccesssories + '<p/>';
+
+                        }
+
+
+                    }
+                    if (high > 41 && high < 61) {
+                        //cold
+                        cold();
+
+                        function cold() {
+                            var finalOutfit = [];
+                            var cold = {
+
+
+                                'men': {
+                                    bottoms: ['<img class="img-resposive pants" src="img/mwarmPants1.png"/>', '<img class="img-resposive pants" src="img/mCamoPants.png"/>', '<img class="img-resposive pants" src="img/mGreyPants.png"/>'],
+                                    shoes: ['<img class ="img-resposive bottomImage" src="img/mColdShoe2.png"/>', '<img class ="img-responsive bottomImage" src="img/mColdShoe.png"/>', '<img class ="img-responsive bottomImage" src="img/RedShoes.png"/>'],
+                                    top: ['<img class="img-resposive imagez" src="img/mredShirt.png"/>', '<img class="img-resposive imagez" src="img/mKnittedSweater.png"/>', '<img class="img-resposive imagez" src="img/mgreenShirt.png"/>'],
+                                    outer: ['<img class="img-resposive topRightImage" src="img/mBlazer.png"/>', '<img class="img-resposive topRightImage" src="img/mjacket1.png"/>', '<img class="img-resposive topRightImage" src="img/mjacket2.png"/>'],
+                                    accesssories: ['<img class ="img-resposive topImage" src="img/mScarf1.png"/>', '<img class ="img-resposive topImage" src="img/mgreenBeanie.png"/>', '<img class ="img-resposive topImage" src="img/mtruckerHat.png"/>'],
+
+                                },
+
+                            }
+
+
+
+
+
+                            var mcoldBottoms = cold.men.bottoms[Math.floor(Math.random() * cold.men.bottoms.length)];
+                            var mcoldShoes = cold.men.shoes[Math.floor(Math.random() * cold.men.shoes.length)];
+                            var mcoldTop = cold.men.top[Math.floor(Math.random() * cold.men.top.length)];
+                            var mcoldOuter = cold.men.outer[Math.floor(Math.random() * cold.men.outer.length)];
+                            var mcoldaccesssories = cold.men.accesssories[Math.floor(Math.random() * cold.men.accesssories.length)];
+
+
+                            text += '   <div class = "col-md-6 fashionBox">';
+
+                            text += '   <div class="leftB">' + mcoldTop + '</div>';
+
+
+                            text += '   <div class="bottomB">' + mcoldShoes + '</div>';
+
+
+                            text += '    <div class="topLeft">' + mcoldaccesssories + '</div>';
+
+
+                            text += '  <div class="topRight">' + mcoldOuter + '</div>';
+
+
+                            text += '  <div class="rightB">' + mcoldBottoms + '</div>';
+
+
+                            text += '   </div>';
+
+
+                            //text+='<p>'+mcoldBottoms+' '+mcoldShoes+' '+mcoldTop+' '+mcoldOuter+' '+mcoldaccesssories+'<p/>';
+
+                        }
+
+
+
+
+                    }
+                    if (high > 61 && high < 80) {
+                        //warm
+
+                        warm();
+
+                        function warm() {
+                            var finalOutfit = [];
+                            var warm = {
+
+                                'men': {
+                                    bottoms: [' <img class="img-responsive pants" src="img/mPants1.png"/>', '<img class="img-responsive  pants" src="img/mCamoPants.png"/>', ' <img class="img-responsive pants" src="img/mwarmPants1.png"/>'],
+                                    shoes: ['<img class ="img-responsive bottomImage" src="img/mDressShoeGrey.png"/>', '<img class ="img-responsive bottomImage" src="img/mColdShoe2.png"/>', '<img class ="img-responsive bottomImage" src="img/mColdShoe.png"/>'],
+                                    top: ['<img class="img-responsive imagez" src="img/mgreenShirt.png"/>', '<img class="img-responsive imagez" src="img/mblueShirt.png"/>', '<img class="img-responsive imagez" src="img/mredShirt.png"/>'],
+                                    outer: ['<img class="img-responsive topRightImage" src="img/mSunglasses.png"/>', '<img class="img-responsive topRightImage" src="img/mBlazerLite.png"/>', '<img class="img-responsive topRightImage" src="img/mBlazer.png"/>'],
+                                    accesssories: ['<img class ="topImage" src="img/mHatBlue.png"/>', '<img class ="topImage" src="img/mBowTie.png"/>', '<img class ="topImage" src="img/mtruckerHat.png"/>'],
+
+                                },
+
+
+                            }
+
+
+
+
+                            var mwarmBottoms = warm.men.bottoms[Math.floor(Math.random() * warm.men.bottoms.length)];
+                            var mwarmShoes = warm.men.shoes[Math.floor(Math.random() * warm.men.shoes.length)];
+                            var mwarmTop = warm.men.top[Math.floor(Math.random() * warm.men.top.length)];
+                            var mwarmOuter = warm.men.outer[Math.floor(Math.random() * warm.men.outer.length)];
+                            var mwarmaccesssories = warm.men.accesssories[Math.floor(Math.random() * warm.men.accesssories.length)];
+
+
+
+
+                            text += '   <div class = "col-md-6 fashionBox">';
+
+                            text += '   <div class="leftB">' + mwarmTop + '</div>';
+
+
+                            text += '   <div class="bottomB">' + mwarmShoes + '</div>';
+
+
+                            text += '    <div class="topLeft">' + mwarmaccesssories + '</div>';
+
+
+                            text += '  <div class="topRight">' + mwarmOuter + '</div>';
+
+
+                            text += '  <div class="rightB">' + mwarmBottoms + '</div>';
+
+
+                            text += '   </div>';
+
+
+
+
+                        }
+
+                    }
+                    if (high > 81 && high < 200) {
+                        //hot
+                        hot();
+
+                        function hot() {
+                            var finalOutfit = [];
+                            var hot = {
+
+
+                                'men': {
+                                    bottoms: ['<img class="img-resposive pants" src="img/mshorts1.png"/>', '<img class="img-resposive pants" src="img/mshorts2.png"/>', '<img class="img-resposive pants" src="img/mshorts3.png"/>'],
+                                    shoes: ['mshoes1', 'mshoes2', 'mshoes3'],
+                                    top: ['mtop1', 'mtop2', 'mtop3'],
+                                    outer: ['mouter1', 'mouter2', 'mouter3'],
+                                    accesssories: ['macc1', 'macc2', 'macc3'],
+
+                                },
+
+                            }
+
+                            console.log(hot.men.bottoms[0]);
+
+
+
+                            var mhotBottoms = hot.men.bottoms[Math.floor(Math.random() * hot.men.bottoms.length)];
+                            var mhotShoes = hot.men.shoes[Math.floor(Math.random() * hot.men.shoes.length)];
+                            var mhotTop = hot.men.top[Math.floor(Math.random() * hot.men.top.length)];
+                            var mhotOuter = hot.men.outer[Math.floor(Math.random() * hot.men.outer.length)];
+                            var mhotaccesssories = hot.men.accesssories[Math.floor(Math.random() * hot.men.accesssories.length)];
+
+
+
+
+
+                            text += '   <div class = "col-md-6 fashionBox">';
+
+                            text += '   <div class="leftB">' + mhotTop + '</div>';
+
+
+                            text += '   <div class="bottomB">' + mhotShoes + '</div>';
+
+
+                            text += '    <div class="topLeft">' + mhotaccesssories + '</div>';
+
+
+                            // text+='  <div class="topRight">'+mcoldOuter+'</div>';
+
+
+                            text += '  <div class="rightB">' + mhotBottoms + '</div>';
+
+
+                            text += '   </div>';
+
+
+
+                            //text += '<p>' + mhotBottoms + ' ' + mhotShoes + ' ' + mhotTop + ' ' + mhotaccesssories + '<p/>';
+
+                        }
+
+
+
+
+
+                    }
+                }
+
+
+
+                var text = '';
+                text += '<div class="row">';
+                text += '<div class="head">';
+
+                text += '<h1>' + currentCity + ' Fashion Forecast</h1>';
+                text += '<h3>Don\'t Leave The House Without Your BFF</h3>'
+                text += '</div>';
+
+                text += '<div>';
+                text += '</div>';
+
+                text += '<div id="currentDay">';
+                text += '<h3 id="todayTitle">Today\'s Fashion Forecast</h3>'
+
+                text += '<h4 id="conditions">' + day + ': ' + climate + '</h4>';
+                text += '<h4 id="temp"> High: ' + high + '</h4>';
+
+                text += '<div class="test">';
+                checkit();
+                text += '</div>';
+
+
+                text += '</div>';
+                text += '</div>';
+
+                text += '<div class="row">';
+                text += '<div class="col-sm-6 nextDays dark">';
+                text += '<h4>' + day2 + ': ' + day2Climate + ', ' + 'high: ' + high2 + '</h4>';
+
+                //where outfit function is called     
+                checkit();
+
+                text += '</div>';
+                text += '<div class="col-sm-6 nextDays light">';
+                text += '<h4>' + day3 + ': ' + day3Climate + ', ' + 'high: ' + high3 + '</h4>';
+
+                // where outfit function is called     
+                checkit();
+
+                text += '</div>';
+                text += '</div>';
+
+                text += '<div class="row">';
+                text += '<div class="col-sm-6 nextDays light">';
+                text += '<h4>' + day4 + ': ' + day4Climate + ', ' + 'high: ' + high4 + '</h4>';
+
+                //     // where outfit function is called     
+                checkit();
+
+                text += '</div>';
+
+                text += '<div class="col-sm-6 nextDays dark">';
+                text += '<h4>' + day5 + ': ' + day5Climate + ', ' + 'high: ' + high5 + '</h4>';
+
+                // where outfit function is called     
+                checkit();
+
+                text += '</div>';
+
+                text += '</div>';
+
+                text += '<div class="row">';
+                text += '<div class="col-sm-6 nextDays dark">';
+                text += '<h4>' + day6 + ': ' + day6Climate + ', ' + 'high: ' + high6 + '</h4>';
+
+                // where outfit function is called     
+                checkit();
+
+
+                text += '</div>';
+
+
+
+
+                text += '<div class="col-sm-6 nextDays light">';
+                text += '<h4>' + day7 + ': ' + day7Climate + ', ' + 'high: ' + high7 + '</h4>';
+
+                // where outfit function is called     
+                checkit();
+
+
+                text += '</div>';
+                text += '</div>';
+
+                text += '<div class="row">';
+                text += '<div class="foot">';
+                text += '<p>Stay connected with the city you love!</p>';
+                text += '<a href="https://www.instagram.com/bouldercolorado/?hl=en"><button href="https://www.instagram.com/bouldercolorado/?hl=en" class="btn custButt">Intstagram</button></a>';
+                text += '</div>';
+                text += '</div>';
+
+
+                document.getElementById('currentForecast').innerHTML = text;
+
+            }
+
+        }
+
+
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //start females
+
+        function femalefashion() {
+
+
+
+
+            data = '';
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22Boulder%2C%20co%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys", true);
+            xhr.onload = function (e) {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        data = xhr.responseText
+                        showUser(data);
+                        //      console.log(data);
+                    } else {
+                        console.error(xhr.statusText);
+                    }
+                }
+            };
+            xhr.onerror = function (e) {
+                console.error(xhr.statusText);
+            };
+            xhr.send(null);
+
+
+
+
+
+            function showUser(data) {
+
+
+
+
+                console.log(typeof (data));
+                data = JSON.parse(data);
+                console.log(data);
+
+                var currentCity = data.query.results.channel.location.city;
+                console.log(currentCity);
+
+                console.log(data.query.results.channel.item.forecast[0])
+                var climate = data.query.results.channel.item.forecast[0].text;
+                console.log(climate);
+                document.getElementById('show').innerHTML = climate;
+                var day = data.query.results.channel.item.forecast[0].day;
+                var high = data.query.results.channel.item.forecast[0].high;
+                console.log(high);
+
+                var day2 = data.query.results.channel.item.forecast[1].day;
+                var day2Climate = data.query.results.channel.item.forecast[1].text;
+                var high2 = data.query.results.channel.item.forecast[1].high;
+
+
+
+
+                var day3 = data.query.results.channel.item.forecast[2].day;
+                var day3Climate = data.query.results.channel.item.forecast[2].text;
+                var high3 = data.query.results.channel.item.forecast[2].high;
+
+                var day4 = data.query.results.channel.item.forecast[3].day;
+                var day4Climate = data.query.results.channel.item.forecast[3].text;
+                var high4 = data.query.results.channel.item.forecast[3].high;
+
+                var day5 = data.query.results.channel.item.forecast[4].day;
+                var day5Climate = data.query.results.channel.item.forecast[4].text;
+                var high5 = data.query.results.channel.item.forecast[4].high;
+
+
+                var day6 = data.query.results.channel.item.forecast[5].day;
+                var day6Climate = data.query.results.channel.item.forecast[5].text;
+                var high6 = data.query.results.channel.item.forecast[5].high;
+
+                var day7 = data.query.results.channel.item.forecast[6].day;
+                var day7Climate = data.query.results.channel.item.forecast[6].text;
+                var high7 = data.query.results.channel.item.forecast[6].high;
+
+
+
+                function checkit() {
+                    if (high > 0 && high < 40) {
+                        function superCold() {
+                            var finalOutfit = [];
+                            var superCold = {
+                                'women': {
+                                    bottoms: ['<img class="pants" src="img/mSuperColdBluePants.png"/>', 'wpants2', 'wpants3'],
+                                    shoes: ['wshoes1', 'wshoes2', 'wshoes3'],
+                                    top: ['wtop1', 'wtop2', 'wtop3'],
+                                    outer: ['wouter1', 'wouter2', 'wouter3'],
+                                    accesssories: ['wacc1', 'wacc2', 'wacc3'],
+                                },
+
+
+                            }
+
+
+                            var wsuperColdBottoms = superCold.women.bottoms[Math.floor(Math.random() * superCold.women.bottoms.length)];
+                            var wsuperColdShoes = superCold.women.shoes[Math.floor(Math.random() * superCold.women.shoes.length)];
+                            var wsuperColdTop = superCold.women.top[Math.floor(Math.random() * superCold.women.top.length)];
+                            var wsuperColdOuter = superCold.women.outer[Math.floor(Math.random() * superCold.women.outer.length)];
+                            var wsuperColdaccesssories = superCold.women.accesssories[Math.floor(Math.random() * superCold.women.accesssories.length)];
+
+
+
+
+                            text += '   <div class = "col-md-6 fashionBox">';
+
+                            text += '   <div class="leftB">' + wsuperColdTop + '</div>';
+
+
+                            text += '   <div class="bottomB">' + wsuperColdShoes + '</div>';
+
+
+                            text += '    <div class="topLeft">' + wsuperColdaccesssories + '</div>';
+
+
+                            text += '  <div class="topRight">' + wsuperColdOuter + '</div>';
+
+
+                            text += '  <div class="rightB">' + wsuperColdBottoms + '</div>';
+
+
+                            text += '   </div>';
+
+
+                            text += '<p>' + wsuperColdBottoms + ' ' + wsuperColdShoes + ' ' + wsuperColdTop + ' ' + wsuperColdOuter + ' ' + wsuperColdaccesssories + '<p/>';
+                        }
+
+
+                    }
+                    if (high > 41 && high < 61) {
+                        //cold
+                        cold();
+
+                        function cold() {
+                            var finalOutfit = [];
+                            var cold = {
+                                'women': {
+                                    bottoms: ['<img class="img-resposive" src="img/wColdSkirt.png"/>', '<img class="img-resposive pants" src="img/mCamoPants.png"/>', '<img class="img-resposive pants" src="img/mGreyPants.png"/>'],
+                                    shoes: ['<img class ="img-resposive bottomImage" src="img/mColdShoe2.png"/>', '<img class ="img-responsive bottomImage" src="img/mColdShoe.png"/>', '<img class ="img-responsive bottomImage" src="img/RedShoes.png"/>'],
+                                    top: ['<img class="img-resposive imagez" src="img/mredShirt.png"/>', '<img class="img-resposive imagez" src="img/mKnittedSweater.png"/>', '<img class="img-resposive imagez" src="img/mgreenShirt.png"/>'],
+                                    outer: ['<img class="img-resposive topRightImage" src="img/mBlazer.png"/>', '<img class="img-resposive topRightImage" src="img/mjacket1.png"/>', '<img class="img-resposive topRightImage" src="img/mjacket2.png"/>'],
+                                    accesssories: ['<img class ="img-resposive topImage" src="img/mScarf1.png"/>', '<img class ="img-resposive topImage" src="img/mgreenBeanie.png"/>', '<img class ="img-resposive topImage" src="img/mtruckerHat.png"/>'],
+                                },
+
+
+                            }
+
+
+                            var wcoldBottoms = cold.women.bottoms[Math.floor(Math.random() * cold.women.bottoms.length)];
+                            var wcoldShoes = cold.women.shoes[Math.floor(Math.random() * cold.women.shoes.length)];
+                            var wcoldTop = cold.women.top[Math.floor(Math.random() * cold.women.top.length)];
+                            var wcoldOuter = cold.women.outer[Math.floor(Math.random() * cold.women.outer.length)];
+                            var wcoldaccesssories = cold.women.accesssories[Math.floor(Math.random() * cold.women.accesssories.length)];
+
+
+                            var mcoldBottoms = cold.men.bottoms[Math.floor(Math.random() * cold.men.bottoms.length)];
+                            var mcoldShoes = cold.men.shoes[Math.floor(Math.random() * cold.men.shoes.length)];
+                            var mcoldTop = cold.men.top[Math.floor(Math.random() * cold.men.top.length)];
+                            var mcoldOuter = cold.men.outer[Math.floor(Math.random() * cold.men.outer.length)];
+                            var mcoldaccesssories = cold.men.accesssories[Math.floor(Math.random() * cold.men.accesssories.length)];
+
+
+
+                            text += '   <div class = "col-md-6 fashionBox">';
+
+                            text += '   <div class="leftB">' + wcoldTop + '</div>';
+
+
+                            text += '   <div class="bottomB">' + wcoldShoes + '</div>';
+
+
+                            text += '    <div class="topLeft">' + wcoldaccesssories + '</div>';
+
+
+                            text += '  <div class="topRight">' + wcoldOuter + '</div>';
+
+
+                            text += '  <div class="rightB">' + wcoldBottoms + '</div>';
+
+
+                            text += '   </div>';
+
+
+                            //text+='<p>'+wcoldBottoms+' '+wcoldShoes+' '+wcoldTop+' '+wcoldOuter+' '+wcoldaccesssories+'<p/>';
+                        }
+
+
+
+
+                    }
+                    if (high > 61 && high < 80) {
+                        //warm
+
+                        warm();
+
+                        function warm() {
+                            var finalOutfit = [];
+                            var warm = {
+                                'women': {
+                                    bottoms: ['<img class="img-resposive" src="img/wSkirt.png"/>', '<img class="img-resposive" src="img/wskirt.png"/>', '<img class="img-resposive" src="img/wSkirt.png"/>'],
+                                    shoes: ['<img class="img-resposive" src="img/wShoe.png"/>', '<img class="img-resposive" src="img/wShoe.png"/>', '<img class="img-resposive" src="img/wShoe.png"/>'],
+                                    top: ['<img class="img-resposive" src="img/wShirt.png"/>', '<img class="img-resposive" src="img/wShirt.png"/>', '<img class="img-resposive" src="img/wShirt.png"/>'],
+                                    outer: ['<img class="img-resposive" src="img/wScarf.png"/>', '<img class="img-resposive" src="img/wScarf.png"/>', '<img class="img-resposive" src="img/wScarf.png"/>'],
+                                    accesssories: ['<img class="img-resposive" src="img/wPurse.png"/>', '<img class="img-resposive" src="img/wPurse.png"/>', '<img class="img-resposive" src="img/wPurse.png"/>'],
+                                },
+
+
+
+                            }
+
+
+                            var wwarmBottoms = warm.women.bottoms[Math.floor(Math.random() * warm.women.bottoms.length)];
+                            var wwarmShoes = warm.women.shoes[Math.floor(Math.random() * warm.women.shoes.length)];
+                            var wwarmTop = warm.women.top[Math.floor(Math.random() * warm.women.top.length)];
+                            var wwarmOuter = warm.women.outer[Math.floor(Math.random() * warm.women.outer.length)];
+                            var wwarmaccesssories = warm.women.accesssories[Math.floor(Math.random() * warm.women.accesssories.length)];
+
+
+                            text += '   <div class = "col-md-6 fashionBox">';
+
+                            text += '   <div class="leftB">' + wwarmTop + '</div>';
+
+
+                            text += '   <div class="bottomB">' + wwarmShoes + '</div>';
+
+
+                            text += '    <div class="topLeft">' + wwarmaccesssories + '</div>';
+
+
+                            text += '  <div class="topRight">' + wwarmOuter + '</div>';
+
+
+                            text += '  <div class="rightB">' + wwarmBottoms + '</div>';
+
+
+                            text += '   </div>';
+
+
+
+
+                            //text+='<p>'+wwarmBottoms+' '+wwarmShoes+' '+wwarmTop+' '+wwarmOuter+' '+wwarmaccesssories+'<p/>';
+                        }
+
+                    }
+                    if (high > 81 && high < 200) {
+                        //hot
+                        hot();
+
+                        function hot() {
+                            var finalOutfit = [];
+                            var hot = {
+                                'women': {
+                                    bottoms: ['wpants1', 'wpants2', 'wpants3'],
+                                    shoes: ['wshoes1', 'wshoes2', 'wshoes3'],
+                                    top: ['wtop1', 'wtop2', 'wtop3'],
+                                    outer: ['wouter1', 'wouter2', 'wouter3'],
+                                    accesssories: ['wacc1', 'wacc2', 'wacc3'],
+                                },
+
+
+
+                            }
+
+                            console.log(hot.men.bottoms[0]);
+
+                            var whotBottoms = hot.women.bottoms[Math.floor(Math.random() * hot.women.bottoms.length)];
+                            var whotShoes = hot.women.shoes[Math.floor(Math.random() * hot.women.shoes.length)];
+                            var whotTop = hot.women.top[Math.floor(Math.random() * hot.women.top.length)];
+                            var whotOuter = hot.women.outer[Math.floor(Math.random() * hot.women.outer.length)];
+                            var whotaccesssories = hot.women.accesssories[Math.floor(Math.random() * hot.women.accesssories.length)];
+
+
+
+
+                            text += '   <div class = "col-md-6 fashionBox">';
+
+                            text += '   <div class="leftB">' + whotTop + '</div>';
+
+
+                            text += '   <div class="bottomB">' + whotShoes + '</div>';
+
+
+                            text += '    <div class="topLeft">' + whotaccesssories + '</div>';
+
+
+                            text += '  <div class="topRight">' + whotOuter + '</div>';
+
+
+                            text += '  <div class="rightB">' + whotBottoms + '</div>';
+
+
+                            text += '   </div>';
+
+                            text += '<p>' + whotmBottoms + ' ' + whotShoes + ' ' + whotTop + ' ' + whotOuter + ' ' + whotaccesssories + '<p/>';
+                        }
+                    }
+                }
+
+
+                var text = '';
+                text += '<div class="row">';
+                text += '<div class="head">';
+
+                text += '<h1>' + currentCity + ' Fashion Forecast</h1>';
+                text += '<h3>Don\'t Leave The House Without Your BFF</h3>'
+                text += '</div>';
+
+                text += '<div>';
+                text += '</div>';
+
+                text += '<div id="currentDay">';
+                text += '<h3 id="todayTitle">Today\'s Fashion Forecast</h3>'
+
+                text += '<h4 id="conditions">' + day + ': ' + climate + '</h4>';
+                text += '<h4 id="temp"> High: ' + high + '</h4>';
+
+                text += '<div class="test">';
+                checkit();
+                text += '</div>';
+
+
+                text += '</div>';
+                text += '</div>';
+
+                text += '<div class="row">';
+                text += '<div class="col-sm-6 nextDays dark">';
+                text += '<h4>' + day2 + ': ' + day2Climate + ', ' + 'high: ' + high2 + '</h4>';
+
+                //where outfit function is called     
+                checkit();
+
+                text += '</div>';
+                text += '<div class="col-sm-6 nextDays light">';
+                text += '<h4>' + day3 + ': ' + day3Climate + ', ' + 'high: ' + high3 + '</h4>';
+
+                // where outfit function is called     
+                checkit();
+
+                text += '</div>';
+                text += '</div>';
+
+                text += '<div class="row">';
+                text += '<div class="col-sm-6 nextDays light">';
+                text += '<h4>' + day4 + ': ' + day4Climate + ', ' + 'high: ' + high4 + '</h4>';
+
+                //     // where outfit function is called     
+                checkit();
+
+                text += '</div>';
+
+                text += '<div class="col-sm-6 nextDays dark">';
+                text += '<h4>' + day5 + ': ' + day5Climate + ', ' + 'high: ' + high5 + '</h4>';
+
+                // where outfit function is called     
+                checkit();
+
+                text += '</div>';
+
+                text += '</div>';
+
+                text += '<div class="row">';
+                text += '<div class="col-sm-6 nextDays dark">';
+                text += '<h4>' + day6 + ': ' + day6Climate + ', ' + 'high: ' + high6 + '</h4>';
+
+                // where outfit function is called     
+                checkit();
+
+
+                text += '</div>';
+
+
+
+
+                text += '<div class="col-sm-6 nextDays light">';
+                text += '<h4>' + day7 + ': ' + day7Climate + ', ' + 'high: ' + high7 + '</h4>';
+
+                // where outfit function is called     
+                checkit();
+
+
+                text += '</div>';
+                text += '</div>';
+
+                text += '<div class="row">';
+                text += '<div class="foot">';
+                text += '<p>Stay connected with the city you love!</p>';
+                text += '<a href="https://www.instagram.com/bouldercolorado/?hl=en"><button href="https://www.instagram.com/bouldercolorado/?hl=en" class="btn custButt">Intstagram</button></a>';
+                text += '</div>';
+                text += '</div>';
+
+
+                document.getElementById('currentForecast').innerHTML = text;
+
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>
